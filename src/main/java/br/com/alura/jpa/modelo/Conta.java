@@ -3,6 +3,7 @@ package br.com.alura.jpa.modelo;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Conta {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -18,8 +19,8 @@ public class Conta {
 	private Integer agencia;
 	private Integer numero;
 	private Double saldo;
-	
-	@OneToMany
+									//carregar antecipadamente 
+	@OneToMany(mappedBy = "conta", fetch = FetchType.EAGER) // relacionamento bidirecional
 	private List<Movimentacao> movimentacoes;
 
 	public void setSaldo(Double saldo) {
